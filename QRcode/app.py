@@ -1,7 +1,13 @@
-from flask import Flask, render_template, request 
-from app_main import main,generate_code,generate_QR
+from flask import Flask, render_template, request, jsonify
+from app_main import Manager, generate_QR
 #print("dj")
 app = Flask(__name__)  
+
+WELDSEM_SIGNAL = False
+PRINTER_SIGNAL = False
+
+
+manager = Manager()
 
 @app.route('/')  
 def upload():  
@@ -10,12 +16,10 @@ def upload():
 @app.route('/send_signal', methods = ['POST'])  
 def get_signal():  
     if request.method == 'POST': 
-        weldsem_signal = request.form.get('WS') 
-        printer_signal = request.form.get('PS') 
-        
-    main(weldsem_signal,printer_signal)    
-       
-
+        weldsem_signal = True if request.form.get('WS') == "on" else False
+        printer_signal = True if request.form.get('PS') == "on" else False
+        print(weldsem_signal, printer_signal)
+    manager.main(weldsem_signal,printer_signal)    
     #return render_template("index.html", QR_Image = 'img_path')  
     return render_template("index.html")
 

@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "qr-generator-backend"
+version = "0.1.0"
+description = ""
+authors = ["Prabal Pathak <prabal01pathak@gmail.com>"]
+readme = "README.md"
+packages = [{include = "qr_generator_backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Flask = "^2.2.2"
+qrcode = "^7.3.1"
+Pillow = "^9.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
